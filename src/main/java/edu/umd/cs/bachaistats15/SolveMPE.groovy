@@ -72,9 +72,6 @@ m.add predicate: "votesDem", types: [ArgumentType.UniqueID]
 
 m.addKernel(new BiasKernel(votesDem, bias, new PositiveWeight(1.0)));
 
-//m.add rule : ( votesDem(A) & friends(B,A) ) >> votesDem(B),  weight : 2.0, squared: false
-//m.add rule : ( ~votesDem(A) & friends(B,A) ) >> ~votesDem(B),  weight : 2.0, squared: false
-
 m.add rule : ( votesDem(A) & upvoted(B,A) ) >> votesDem(B),  weight : 1.0, squared: false
 m.add rule : ( ~votesDem(A) & upvoted(B,A) ) >> ~votesDem(B),  weight : 1.0, squared: false
 
@@ -156,9 +153,9 @@ if (method.equals("hlmrf")) {
 else if (method.equals("mplp") || method.equals("mplp-cycles")) {
 	cb.setProperty(MPEInference.REASONER_KEY, new UAIFormatReasonerFactory());
 	if (method.equals("mplp"))
-		cb.setProperty(ExecutableReasoner.EXECUTABLE_KEY, "/linqshomes/bach/apps/mplp_ver2/solver-nocycles");
+		cb.setProperty(ExecutableReasoner.EXECUTABLE_KEY, "solver-nocycles");
 	else
-		cb.setProperty(ExecutableReasoner.EXECUTABLE_KEY, "/linqshomes/bach/apps/mplp_ver2/solver");
+		cb.setProperty(ExecutableReasoner.EXECUTABLE_KEY, "solver");
 	MPEInference mpe = new MPEInference(m, rvDB, cb)
 	mpe.mpeInference();
 	
